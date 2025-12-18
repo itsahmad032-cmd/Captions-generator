@@ -2,142 +2,121 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AI Caption & Bio Generator</title>
+<title>AI Caption, Bio & Nickname Generator</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Fonts (25 Fonts) -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Montserrat&family=Roboto&family=Lobster&family=Pacifico&family=Oswald&family=Raleway&family=Playfair+Display&family=Merriweather&family=Anton&family=Bebas+Neue&family=Orbitron&family=Great+Vibes&family=Dancing+Script&family=Courgette&family=Permanent+Marker&family=Fredoka&family=Archivo+Black&family=Cinzel&family=Acme&family=Kalam&family=Varela+Round&family=Rubik&family=Nunito&display=swap" rel="stylesheet">
+
 <style>
-body{
-  font-family: Arial, sans-serif;
-  background:#0f172a;
-  color:#fff;
-  margin:0;
-  padding:0;
-}
-.container{
-  max-width:800px;
-  margin:auto;
-  padding:20px;
-}
-h1{
-  text-align:center;
-  color:#38bdf8;
-}
-.box{
-  background:#020617;
-  padding:20px;
-  border-radius:10px;
-  margin-bottom:20px;
-}
-input, select, button, textarea{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border:none;
-  border-radius:6px;
-  font-size:16px;
-}
-button{
-  background:#38bdf8;
-  color:#000;
-  font-weight:bold;
-  cursor:pointer;
-}
-button:hover{
-  background:#0ea5e9;
-}
-.output{
-  background:#020617;
-  padding:15px;
-  border-radius:6px;
-  margin-top:10px;
-  min-height:80px;
-}
-footer{
-  text-align:center;
-  opacity:0.6;
-  font-size:14px;
-}
+body{font-family:Poppins,sans-serif;background:#0f172a;color:#fff;margin:0}
+.container{max-width:1000px;margin:auto;padding:20px}
+h1{text-align:center;color:#38bdf8}
+.card{background:#020617;padding:20px;border-radius:12px;margin-bottom:20px}
+input,select,button{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:none;font-size:16px}
+button{background:#38bdf8;color:#000;font-weight:600;cursor:pointer}
+.output{background:#020617;padding:15px;border-radius:8px;margin-top:10px;min-height:60px}
+.font-preview span{display:block;padding:8px;border-bottom:1px solid #1e293b;cursor:pointer}
+footer{text-align:center;opacity:.6;margin-top:20px}
 </style>
 </head>
 
 <body>
 <div class="container">
-<h1>AI Caption & Bio Generator</h1>
+<h1>🔥 AI Caption, Bio & Nickname Generator</h1>
 
-<div class="box">
+<!-- Caption Generator -->
+<div class="card">
 <h3>📸 Caption Generator</h3>
-<input type="text" id="captionKeyword" placeholder="Enter keyword (e.g. travel, fitness)">
-<button onclick="generateCaption()">Generate Caption</button>
-<div class="output" id="captionResult"></div>
-</div>
-
-<div class="box">
-<h3>👤 Bio Generator</h3>
-<select id="bioStyle">
-<option value="cool">Cool</option>
-<option value="professional">Professional</option>
-<option value="funny">Funny</option>
+<input id="capKey" placeholder="Keyword e.g. gym, business, islamic">
+<select id="capTone">
+<option>Motivational</option><option>Funny</option><option>Islamic</option>
+<option>Business</option><option>Romantic</option>
 </select>
-<button onclick="generateBio()">Generate Bio</button>
-<div class="output" id="bioResult"></div>
+<button onclick="genCaption()">Generate Caption</button>
+<div class="output" id="capOut"></div>
 </div>
 
-<div class="box">
-<h3>#️⃣ Hashtag Generator</h3>
-<input type="text" id="hashtagKeyword" placeholder="Enter keyword (e.g. reels, business)">
-<button onclick="generateHashtags()">Generate Hashtags</button>
-<div class="output" id="hashtagResult"></div>
+<!-- Bio Generator -->
+<div class="card">
+<h3>👤 Bio Generator</h3>
+<select id="bioType">
+<option>Cool</option><option>Professional</option><option>Islamic</option>
+<option>Business</option><option>Funny</option>
+</select>
+<button onclick="genBio()">Generate Bio</button>
+<div class="output" id="bioOut"></div>
 </div>
 
-<footer>
-© 2025 | Free AI Tools
-</footer>
+<!-- Nickname Generator -->
+<div class="card">
+<h3>😎 Nickname Generator</h3>
+<input id="nickName" placeholder="Enter your name">
+<select id="nickStyle">
+<option>Cool</option><option>Gamer</option><option>Stylish</option><option>Islamic</option>
+</select>
+<button onclick="genNick()">Generate Nickname</button>
+<div class="output" id="nickOut"></div>
+</div>
+
+<!-- Fonts -->
+<div class="card">
+<h3>🎨 Font Styles (Click to Copy)</h3>
+<div class="font-preview" id="fontBox"></div>
+</div>
+
+<footer>© 2025 Free AI Tools</footer>
 </div>
 
 <script>
-function generateCaption(){
-  const k = document.getElementById("captionKeyword").value || "life";
-  const captions = [
-    `Living my best ${k} life ✨`,
-    `${k} vibes only 💙`,
-    `Chasing dreams & ${k} goals 🚀`,
-    `Less stress, more ${k} 😎`,
-    `${k} mode: ON 🔥`
-  ];
-  document.getElementById("captionResult").innerText =
-    captions[Math.floor(Math.random()*captions.length)];
+function genCaption(){
+let k=document.getElementById('capKey').value||"life";
+let t=document.getElementById('capTone').value;
+let caps={
+Motivational:[`No excuses, just ${k} 🔥`,`Stay focused on ${k} 💪`],
+Funny:[`${k} mode ON 😂`,`Too much ${k} today 🤪`],
+Islamic:[`Trust Allah in ${k} 🤍`,`Sabr brings ${k}`],
+Business:[`${k} is the new currency 💼`,`Build your ${k} brand`],
+Romantic:[`${k} feels 💕`,`Lost in ${k}`]
+};
+capOut.innerText=caps[t][Math.floor(Math.random()*caps[t].length)];
 }
 
-function generateBio(){
-  const style = document.getElementById("bioStyle").value;
-  let bios = [];
-  if(style==="cool"){
-    bios = [
-      "Dream big. Stay cool 😎",
-      "Creating my own vibe ✨",
-      "Born to stand out 🔥"
-    ];
-  }else if(style==="professional"){
-    bios = [
-      "Focused | Passionate | Driven",
-      "Helping ideas grow 🚀",
-      "Building skills every day"
-    ];
-  }else{
-    bios = [
-      "Half human, half awesome 😂",
-      "Powered by chai ☕",
-      "Professional overthinker 🤪"
-    ];
-  }
-  document.getElementById("bioResult").innerText =
-    bios[Math.floor(Math.random()*bios.length)];
+function genBio(){
+let b={
+Cool:["Dream big ✨","Living my vibe 😎"],
+Professional:["Focused | Skilled | Driven","Building value daily"],
+Islamic:["Trust Allah 🤍","Alhamdulillah always"],
+Business:["Helping brands grow 🚀","Digital mindset"],
+Funny:["Half human 😂","Powered by chai ☕"]
+};
+let t=bioType.value;
+bioOut.innerText=b[t][Math.floor(Math.random()*b[t].length)];
 }
 
-function generateHashtags(){
-  const k = document.getElementById("hashtagKeyword").value || "trending";
-  document.getElementById("hashtagResult").innerText =
-    `#${k} #${k}life #${k}daily #viral #explore #reels`;
+function genNick(){
+let n=nickName.value||"User";
+let s=nickStyle.value;
+let out=[
+`${n}_Official`,`Its${n}`,`${n}X`,`Real${n}`,
+`${n}786`,`${n}_Pro`,`${n}_Writes`
+];
+nickOut.innerText=out[Math.floor(Math.random()*out.length)];
 }
+
+const fonts=[
+"Poppins","Montserrat","Roboto","Lobster","Pacifico","Oswald","Raleway",
+"Playfair Display","Merriweather","Anton","Bebas Neue","Orbitron",
+"Great Vibes","Dancing Script","Courgette","Permanent Marker",
+"Fredoka","Archivo Black","Cinzel","Acme","Kalam","Varela Round","Rubik","Nunito"
+];
+fonts.forEach(f=>{
+let s=document.createElement("span");
+s.style.fontFamily=f;
+s.innerText=f+" Style Example";
+s.onclick=()=>navigator.clipboard.writeText(s.innerText);
+fontBox.appendChild(s);
+});
 </script>
 </body>
-                     </html>
+</html>
