@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Caption & Bio Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#0f172a;
+  color:#fff;
+  margin:0;
+  padding:0;
+}
+.container{
+  max-width:800px;
+  margin:auto;
+  padding:20px;
+}
+h1{
+  text-align:center;
+  color:#38bdf8;
+}
+.box{
+  background:#020617;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+input, select, button, textarea{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:6px;
+  font-size:16px;
+}
+button{
+  background:#38bdf8;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:hover{
+  background:#0ea5e9;
+}
+.output{
+  background:#020617;
+  padding:15px;
+  border-radius:6px;
+  margin-top:10px;
+  min-height:80px;
+}
+footer{
+  text-align:center;
+  opacity:0.6;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1>AI Caption & Bio Generator</h1>
+
+<div class="box">
+<h3>📸 Caption Generator</h3>
+<input type="text" id="captionKeyword" placeholder="Enter keyword (e.g. travel, fitness)">
+<button onclick="generateCaption()">Generate Caption</button>
+<div class="output" id="captionResult"></div>
+</div>
+
+<div class="box">
+<h3>👤 Bio Generator</h3>
+<select id="bioStyle">
+<option value="cool">Cool</option>
+<option value="professional">Professional</option>
+<option value="funny">Funny</option>
+</select>
+<button onclick="generateBio()">Generate Bio</button>
+<div class="output" id="bioResult"></div>
+</div>
+
+<div class="box">
+<h3>#️⃣ Hashtag Generator</h3>
+<input type="text" id="hashtagKeyword" placeholder="Enter keyword (e.g. reels, business)">
+<button onclick="generateHashtags()">Generate Hashtags</button>
+<div class="output" id="hashtagResult"></div>
+</div>
+
+<footer>
+© 2025 | Free AI Tools
+</footer>
+</div>
+
+<script>
+function generateCaption(){
+  const k = document.getElementById("captionKeyword").value || "life";
+  const captions = [
+    `Living my best ${k} life ✨`,
+    `${k} vibes only 💙`,
+    `Chasing dreams & ${k} goals 🚀`,
+    `Less stress, more ${k} 😎`,
+    `${k} mode: ON 🔥`
+  ];
+  document.getElementById("captionResult").innerText =
+    captions[Math.floor(Math.random()*captions.length)];
+}
+
+function generateBio(){
+  const style = document.getElementById("bioStyle").value;
+  let bios = [];
+  if(style==="cool"){
+    bios = [
+      "Dream big. Stay cool 😎",
+      "Creating my own vibe ✨",
+      "Born to stand out 🔥"
+    ];
+  }else if(style==="professional"){
+    bios = [
+      "Focused | Passionate | Driven",
+      "Helping ideas grow 🚀",
+      "Building skills every day"
+    ];
+  }else{
+    bios = [
+      "Half human, half awesome 😂",
+      "Powered by chai ☕",
+      "Professional overthinker 🤪"
+    ];
+  }
+  document.getElementById("bioResult").innerText =
+    bios[Math.floor(Math.random()*bios.length)];
+}
+
+function generateHashtags(){
+  const k = document.getElementById("hashtagKeyword").value || "trending";
+  document.getElementById("hashtagResult").innerText =
+    `#${k} #${k}life #${k}daily #viral #explore #reels`;
+}
+</script>
+</body>
+                     </html>
